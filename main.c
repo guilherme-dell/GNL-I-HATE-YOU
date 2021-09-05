@@ -6,12 +6,12 @@
 /*   By: gnuncio- <gnuncio-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 17:10:12 by gnuncio-          #+#    #+#             */
-/*   Updated: 2021/09/04 23:44:17 by gnuncio-         ###   ########.fr       */
+/*   Updated: 2021/09/05 00:30:18 by gnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+/*
 int	main(void)
 {
 	int	fd;
@@ -26,7 +26,7 @@ int	main(void)
 	txt = get_next_line(fd);
 	printf("%s",txt);
 	free(txt);
-/*
+
 	while ((txt = get_next_line(fd)) > 0)
 	{
 		printf("%s",txt);
@@ -34,7 +34,26 @@ int	main(void)
 			free(txt);
 		txt =  0;
 	}
-*/
+
 	close(fd);
 	return (0);
+}
+*/
+
+int main (void)
+{
+	int fd;
+	char *texticulo;
+
+	fd = open("doc.txt", O_RDONLY);
+
+	while ((texticulo = get_next_line(fd)))
+	{
+	printf("|%s|",texticulo);
+	free(texticulo);
+	texticulo = 0;
+	}
+
+	printf("&%s&",texticulo);
+	close(fd);
 }

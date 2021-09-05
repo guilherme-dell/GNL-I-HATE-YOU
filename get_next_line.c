@@ -6,7 +6,7 @@
 /*   By: gnuncio- <gnuncio-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:02:10 by gnuncio-          #+#    #+#             */
-/*   Updated: 2021/09/04 23:55:42 by gnuncio-         ###   ########.fr       */
+/*   Updated: 2021/09/05 00:46:03 by gnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ char	*last_line(char *buffer_temp)
 
 	if (!buffer_temp)
 		return (NULL);
+	if (*buffer_temp == 0)
+	{
+		free(buffer_temp);
+		return(NULL);
+	}
 	temp = ft_strdup(buffer_temp);
 	free (buffer_temp);
 	return (temp);
@@ -91,7 +96,9 @@ char	*get_next_line(int fd)
 		else if (i > 0)
 			buffer_temp = oflw_upd(buffer_temp, buffer_read);
 	}
+
 	ret = last_line(buffer_temp);
 	buffer_temp = NULL;
 	return (ret);
+
 }
