@@ -6,7 +6,7 @@
 /*   By: gnuncio- <gnuncio-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:02:10 by gnuncio-          #+#    #+#             */
-/*   Updated: 2021/09/05 01:17:14 by gnuncio-         ###   ########.fr       */
+/*   Updated: 2021/09/05 02:43:45 by gnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 	char		*ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+		return (NULL);
 	i = 1;
 	while (i > 0)
 	{
