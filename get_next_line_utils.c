@@ -12,6 +12,18 @@
 
 #include	"get_next_line.h"
 
+int	ft_strlen(const char *str)
+{
+	int	counter;
+
+	counter = 0;
+	if (!str)
+		return (0);
+	while (str[counter] != '\0')
+		counter++;
+	return (counter);
+}
+
 char	*ft_strchr(const char *string, int c)
 {
 	if (!string)
@@ -68,39 +80,23 @@ char	*ft_strjoin(char const *str1, char const *str2)
 	return (new_str - (len_str1 + len_str2));
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dest_len)
-{
-	size_t	i;
-
-	if (!dst || !src)
-		return (0);
-	i = 0;
-	if (dest_len != 0)
-	{
-		while (src[i] != '\0' && i < (dest_len - 1))
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (ft_strlen(src));
-}
-
 char	*ft_substr(char const *str, unsigned int start, size_t len)
 {
 	char	*sub_str;
-	size_t	sizestr;
+	size_t	i;
 
-	sizestr = ft_strlen(str);
 	if (!str)
-		return (0);
-	if (start > sizestr)
-		return (ft_strdup(""));
-	sub_str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!sub_str)
-		return (0);
-	ft_strlcpy(sub_str, (str + start), len + 1);
-	sub_str[len] = '\0';
+		return (NULL);
+	sub_str = (char *)malloc((len + 1) * sizeof(char));
+	if (sub_str == NULL)
+		return (NULL);
+	i = 0;
+	while ((i < len) && ((start + i) < ft_strlen(str))
+		&& (str[start + i] != '\0'))
+	{
+		sub_str[i] = str[start + i];
+		i++;
+	}
+	sub_str[i] = '\0';
 	return (sub_str);
 }

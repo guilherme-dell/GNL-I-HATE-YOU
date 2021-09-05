@@ -6,7 +6,7 @@
 /*   By: gnuncio- <gnuncio-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:02:10 by gnuncio-          #+#    #+#             */
-/*   Updated: 2021/09/04 07:20:33 by gnuncio-         ###   ########.fr       */
+/*   Updated: 2021/09/04 16:37:46 by gnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ int	ft_strlen(const char *str)
 	while (str[counter] != '\0')
 		counter++;
 	return (counter);
+}
+
+char *last_line(char *buffer_temp)
+{
+	char *temp;
+
+	if (!buffer_temp)
+		return (NULL);
+	temp = ft_strdup(buffer_temp);
+	free (buffer_temp);
+	return (temp);
 }
 
 char	*oflw_upd(char *buffer_temp, char *buffer_read)
@@ -84,11 +95,16 @@ char	*get_next_line(int fd)
 			return (ret);
 		}
 		i = read (fd, buffer_read, BUFFER_SIZE);
+		if (!buffer_temp && i == 0)
+			printf("DESMAIEI!");
 		buffer_read[i] = '\0';
 		if (!buffer_temp && i > 0)
 			buffer_temp = ft_strdup(buffer_read);
 		else if (i > 0)
 			buffer_temp = oflw_upd(buffer_temp, buffer_read);
 	}
-	return (buffer_temp);
+	printf("OI\n");
+	ret = last_line(&buffer_temp);
+	buffer_temp = NULL;
+	return (0);
 }

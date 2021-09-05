@@ -6,22 +6,21 @@
 /*   By: gnuncio- <gnuncio-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:02:10 by gnuncio-          #+#    #+#             */
-/*   Updated: 2021/09/04 07:20:33 by gnuncio-         ###   ########.fr       */
+/*   Updated: 2021/09/04 23:25:42 by gnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *str)
+char	*last_line(char *buffer_temp)
 {
-	int	counter;
+	char	*temp;
 
-	counter = 0;
-	if (!str)
-		return (0);
-	while (str[counter] != '\0')
-		counter++;
-	return (counter);
+	if (!buffer_temp)
+		return (NULL);
+	temp = ft_strdup(buffer_temp);
+	free (buffer_temp);
+	return (temp);
 }
 
 char	*oflw_upd(char *buffer_temp, char *buffer_read)
@@ -62,6 +61,7 @@ char	*beautiful_ret(char *buffer)
 
 	pos_n = ft_strchr(buffer, '\n') + 1;
 	temp = ft_substr(buffer, 0, (pos_n - buffer));
+	buffer = residue_ret(buffer);
 	return (temp);
 }
 
@@ -80,7 +80,6 @@ char	*get_next_line(int fd)
 		if (ft_strchr(buffer_temp, '\n'))
 		{
 			ret = beautiful_ret(buffer_temp);
-			buffer_temp = residue_ret(buffer_temp);
 			return (ret);
 		}
 		i = read (fd, buffer_read, BUFFER_SIZE);
@@ -90,5 +89,7 @@ char	*get_next_line(int fd)
 		else if (i > 0)
 			buffer_temp = oflw_upd(buffer_temp, buffer_read);
 	}
-	return (buffer_temp);
+	ret = last_line(buffer_temp);
+	buffer_temp = NULL;
+	return (ret);
 }
