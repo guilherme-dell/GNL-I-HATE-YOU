@@ -6,7 +6,7 @@
 /*   By: gnuncio- <gnuncio-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 10:02:10 by gnuncio-          #+#    #+#             */
-/*   Updated: 2021/09/04 23:25:42 by gnuncio-         ###   ########.fr       */
+/*   Updated: 2021/09/04 23:55:42 by gnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ char	*beautiful_ret(char *buffer)
 	char	*pos_n;
 	char	*temp;
 
+	if (!buffer)
+		return (0);
 	pos_n = ft_strchr(buffer, '\n') + 1;
 	temp = ft_substr(buffer, 0, (pos_n - buffer));
-	buffer = residue_ret(buffer);
 	return (temp);
 }
 
@@ -77,9 +78,10 @@ char	*get_next_line(int fd)
 	i = 1;
 	while (i > 0)
 	{
-		if (ft_strchr(buffer_temp, '\n'))
+		if (ft_strchr(buffer_temp, '\n') && buffer_temp != 0)
 		{
 			ret = beautiful_ret(buffer_temp);
+			buffer_temp = residue_ret(buffer_temp);
 			return (ret);
 		}
 		i = read (fd, buffer_read, BUFFER_SIZE);

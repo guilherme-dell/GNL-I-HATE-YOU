@@ -27,7 +27,7 @@ int	ft_strlen(const char *str)
 char	*ft_strchr(const char *string, int c)
 {
 	if (!string)
-		return (0);
+		return (NULL);
 	while (*string)
 	{
 		if (*string == (char) c)
@@ -91,7 +91,7 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 	if (sub_str == NULL)
 		return (NULL);
 	i = 0;
-	while ((i < len) && ((start + i) < ft_strlen(str))
+	while ((i < len) && ((start + i) < (unsigned int )ft_strlen(str))
 		&& (str[start + i] != '\0'))
 	{
 		sub_str[i] = str[start + i];
